@@ -2,6 +2,7 @@
 import io.javalin.Javalin;
 import org.json.JSONException;
 import org.json.JSONObject;
+import sun.security.ssl.Debug;
 
 
 import java.util.List;
@@ -65,6 +66,7 @@ public class APIServer {
                 context.result(String.format("404: Couldn't find user with username '%s'", username));
             }else{
                 System.out.println("200: Found user " + user);
+                context.status(200);
                 context.result(user.toJSON());
             }
         });
@@ -72,18 +74,18 @@ public class APIServer {
 
         // Authenticate user
         // Takes password in body
-        javalinServer.get("/user/:username/authenticate", context -> {
+        javalinServer.post("/user/:username/authenticate", context -> {
             String username = context.pathParam("username");
             String password = context.body();
-            System.out.println("User authentication requrested: " + username + "   " + password);
+            DebugPrinter.print("User authentication requested: " + username + "   " + password);
 
             boolean success = DatabaseConnector.getInstance().authenticateUser(username, password);
             if( !success ){
-                System.out.println("Authentication: failed");
+                DebugPrinter.print("Authentication: failed");
                 context.status(403);
                 context.result("403: Cannot authenticate username and password combination");
             }else{
-                System.out.println("Authentication: success");
+                DebugPrinter.print("Authentication: success");
                 context.result("200: User successfully authenticated");
             }
         });
