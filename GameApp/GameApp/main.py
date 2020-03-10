@@ -6,6 +6,7 @@
 #                                        \__/                                                                #
 #      Great help and example snippets from: https://www.101computing.net/getting-started-with-pygame/       #
 ##############################################################################################################
+from GameApp import Gallow
 import pygame
 pygame.init()
 
@@ -17,6 +18,10 @@ size = (700, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("My First Game")
 
+
+gallow = Gallow.Gallow(700/2-85, 50)
+spriteList = pygame.sprite.Group()
+spriteList.add(gallow)
 
 # The loop will carry on until the user exit the game (e.g. clicks the close button).
 carryOn = True
@@ -33,8 +38,10 @@ while carryOn:
 
         if event.type == pygame.KEYDOWN:
             print("A key was pressed: ", event)
+            gallow.increment()
 
     # --- Game logic should go here
+    spriteList.update()
 
     # --- Drawing code should go here
     # First, clear the screen to white.
@@ -47,6 +54,9 @@ while carryOn:
     pygame.draw.rect(screen, COLOUR_FOREGROUND, [offset, 0, middle, 500])
     for i in range(5):
         pygame.draw.line(screen, (255, 255, 255), [offset + divWidth * i, 0], [offset + divWidth * i, 500], 5)
+
+    # Add the gallow to the game
+    spriteList.draw(screen)
 
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
