@@ -7,6 +7,7 @@
 #      Great help and example snippets from: https://www.101computing.net/getting-started-with-pygame/       #
 ##############################################################################################################
 from GameApp import Gallow
+import unicodedata
 import pygame
 pygame.init()
 
@@ -37,8 +38,12 @@ while carryOn:
             carryOn = False  # Flag that we are done so we exit this loop
 
         if event.type == pygame.KEYDOWN:
-            print("A key was pressed: ", event)
+            print("A key was pressed: ", event.unicode)
+            # some_soap_method(event.unicode)
             gallow.increment()
+
+    # keys = pygame.key.get_pressed()
+    # print("Key pressed: ", keys)
 
     # --- Game logic should go here
     spriteList.update()
