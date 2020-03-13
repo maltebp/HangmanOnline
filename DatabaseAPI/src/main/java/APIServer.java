@@ -1,5 +1,6 @@
 
 import io.javalin.Javalin;
+import io.javalin.core.JavalinConfig;
 import org.json.JSONException;
 import org.json.JSONObject;
 import sun.security.ssl.Debug;
@@ -23,7 +24,7 @@ public class APIServer {
         if( javalinServer != null )
             stop();
 
-        javalinServer = Javalin.create().start(port);
+        javalinServer = Javalin.create(config -> config.enableCorsForAllOrigins()).start(port);
 
         javalinServer.before(context -> {
             DebugPrinter.printf(
