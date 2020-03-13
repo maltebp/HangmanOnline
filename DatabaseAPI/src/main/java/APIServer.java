@@ -2,7 +2,6 @@
 import io.javalin.Javalin;
 import org.json.JSONException;
 import org.json.JSONObject;
-import sun.security.ssl.Debug;
 
 
 import java.util.List;
@@ -13,7 +12,7 @@ public class APIServer {
     private static final String UPDATE_KEY = "hangman1234";
 
     private int port;
-    private Javalin javalinServer;
+    private Javalin javalinServer;cd 
 
     public APIServer(int port){
         this.port = port;
@@ -86,6 +85,7 @@ public class APIServer {
                 context.result("403: Cannot authenticate username and password combination");
             }else{
                 DebugPrinter.print("Authentication: success");
+                context.status(200);
                 context.result("200: User successfully authenticated");
             }
         });
@@ -111,6 +111,7 @@ public class APIServer {
                     DatabaseConnector.getInstance().updateUserRating(username, rating);
                     context.status(200);
                     context.result("200: User rating update");
+                    DebugPrinter.printf("Updated user rating (user: %s, rating: %s)", username, rating);
                 }
 
             }catch(JSONException e){

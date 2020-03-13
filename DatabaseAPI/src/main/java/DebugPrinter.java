@@ -14,4 +14,10 @@ public class DebugPrinter {
             System.out.println("DEBUG: " + msg);
         }
     }
+
+    public static void printf(String format, Object ... args){
+        if( enabled ){
+            System.out.printf("DEBUG: "+format, args);
+        }
+    }
 }

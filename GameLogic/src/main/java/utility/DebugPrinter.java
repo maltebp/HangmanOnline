@@ -1,4 +1,4 @@
-package logic;
+package utility;
 
 /**
  * Static class to print debug messages which may be toggled on and of
@@ -14,6 +14,12 @@ public class DebugPrinter {
     public static void print(String msg){
         if( enabled ){
             System.out.println("DEBUG: " + msg);
+        }
+    }
+
+    public static void printf(String format, Object ... args){
+        if( enabled ){
+            System.out.printf("DEBUG: "+format, args);
         }
     }
 }
