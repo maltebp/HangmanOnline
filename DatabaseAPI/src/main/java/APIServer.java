@@ -2,6 +2,7 @@
 import io.javalin.Javalin;
 import org.json.JSONException;
 import org.json.JSONObject;
+import sun.security.ssl.Debug;
 
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class APIServer {
     private static final String UPDATE_KEY = "hangman1234";
 
     private int port;
-    private Javalin javalinServer;cd 
+    private Javalin javalinServer;
 
     public APIServer(int port){
         this.port = port;
@@ -25,7 +26,7 @@ public class APIServer {
         javalinServer = Javalin.create().start(port);
 
         javalinServer.before(context -> {
-            System.out.printf(
+            DebugPrinter.printf(
                     "\nNew Request: \n"+
                     "   Source: %s\n" +
                     "   Method: %s\n" +
