@@ -1,3 +1,5 @@
+package utility;
+
 /**
  * Static class to print debug messages which may be toggled on and of
  * using the toggle(..) method. */
