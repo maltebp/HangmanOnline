@@ -44,7 +44,7 @@ public class HangmanLogicServer implements HangmanLogic, Runnable {
 
     void start(int port){
         HangmanLogicServer logic = new HangmanLogicServer();
-        endpoint = Endpoint.publish(String.format("http://localhost:%d/hangmanlogic", port), logic);
+        endpoint = Endpoint.publish(String.format("http://[::]:%d/hangmanlogic", port), logic);
         timeoutThread.start();
     }
 

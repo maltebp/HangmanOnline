@@ -16,7 +16,7 @@ public class TestClient {
         User user = null;
         Scanner scan = new Scanner(System.in);
 
-        URL url = new URL("http://localhost:9901/hangmanlogic?wsdl");
+        URL url = new URL("http://maltebp.dk:9902/hangmanlogic?wsdl");
         QName qname = new QName("http://logic/", "HangmanLogicServerService");
         Service service = Service.create(url, qname);
 

@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class ServerController {
 
-    private static final int PORT = 9901;
+    private static final int PORT = 9902;
 
 
     public static void main(String[] args) {
