@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Allows us to use Open Sans font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" >
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <title>Hangman Online</title>
+</head>
+<body>
+    
+    <div class="title">Hangman Online</div>
+
+    <!-- Download Button -->
+    <div style="margin: auto; width: fit-content;">
+        <!-- Wrapped in div to center it -->
+        <button class="downloadbutton" onclick="window.location.href = 'hangmanonline.exe'">Download Game</button>
+    </div>
+
+    <!-- User ratings -->
+    <div class="ratingcontainer">
+        <div class="ratingtitle">User Ratings</div>
+
+        <!-- Rating table -->
+        <table id="ratingtable" class="ratingtable">
+            <tr class="ratingtable_header">
+                <th></th>
+                <th style="text-align: left;">Name</th>
+                <th style="text-align: right;">Rating</th>
+            </tr>
+        </table>
+
+        <p id="rating_error" class="rating_error">An error occured when loading user ratings :(</p>
+
+        <!-- Loading Spinner  -->
+        <div class="loadercontainer" id="loadingspinner"><div  class="lds-ripple"><div></div><div></div></div> </div>
+    </div>
+
+
+    <script type="text/javascript" src="jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="loadratings.js"></script>
+</body>
+</html>
