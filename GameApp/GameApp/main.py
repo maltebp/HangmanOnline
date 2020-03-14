@@ -12,15 +12,19 @@ import zeep
 import pygame
 pygame.init()
 
+username, password = sys.argv[1], sys.argv[2]
+
+
 COLOUR_BACKGROUND = (221, 110, 56)
 COLOUR_FOREGROUND = (221, 192, 56)
-font = pygame.font.Font('freesansbold.ttf', 32)
+font_word = pygame.font.Font('freesansbold.ttf', 32)
+font_guess = pygame.font.Font('freesansbold.ttf', 16)
 
 
 def login() -> zeep.Client:
     client = zeep.Client(wsdl="http://maltebp.dk:9902/hangmanlogic?wsdl")
-    client.service.logout(sys.argv[1], sys.argv[2])
-    client.service.login(sys.argv[1], sys.argv[2])
+    client.service.logout(username, password)
+    client.service.login(username, password)
     return client
 
 
@@ -37,8 +41,8 @@ offset = round(width/5)
 middle = offset * 3
 divWidth = round(middle / 4)
 
-text = font.render("This is a text box", True, (0, 0, 0))
-gallow = Gallow.Gallow(700 / 2 - 85, 50)
+
+gallow = Gallow.Gallow(screen.get_rect().midtop[0] - 85, 25)
 spriteList = pygame.sprite.Group()
 spriteList.add(gallow)
 
@@ -50,23 +54,35 @@ clock = pygame.time.Clock()
 # access server
 gameServer = login()
 # start game on server
-gamestate = gameServer.service.startGame(sys.argv[1])
+gamestate = gameServer.service.startGame(username)
+print("Game state: ")
+print(gamestate)
 
+
+key = ''
 
 while carryOn:
     # --- Main event loop
+
+    # --- Game logic should go here
     for event in pygame.event.get():  # User did something
         if event.type == pygame.QUIT:  # If user clicked close
             carryOn = False  # Flag that we are done so we exit this loop
-
         if event.type == pygame.KEYDOWN:
-            print("A key was pressed: ", event.unicode)
-            # some_soap_method(event.unicode)
-            gallow.increment()
+            if event.key == pygame.K_RETURN and key != '':
+                print("Guess: '" + key + "' sent to server")
+                gamestate = gameServer.service.guessLetter(username, ord(key[0]))
+                print(gamestate)
+                key = ''
+            else:
+                print("A key was pressed: ", event.unicode)
+                key = event.unicode
 
 
-    # --- Game logic should go here
+
     spriteList.update()
+    word = font_word.render(gamestate.currentWord, True, (0, 0, 0))
+    guess = font_guess.render("You guessed: '" + key + "', press enter to accept", True, (0, 0, 0))
 
     # --- Drawing code should go here
     # First, clear the screen to white.
@@ -82,8 +98,8 @@ while carryOn:
     spriteList.draw(screen)
 
     # Add text
-    screen.blit(text, screen.get_rect().center)  # write text
-
+    screen.blit(word, (screen.get_rect().center[0] - 100, screen.get_rect().center[1]))  # write text
+    screen.blit(guess, (screen.get_rect().center[0] - 150, screen.get_rect().center[1] + 50))  # write text
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
 
