@@ -1,0 +1,187 @@
+
+/* Global "definitions" */
+:root {
+    --primary: #24333f;
+    --secondary: #c0ccd6;
+}
+
+/* Overall style (font, background) */
+body {
+    font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+    background-color: var(--primary);
+    margin:0;
+}
+
+
+.title {
+    font-size: 500%;
+    color: white;
+    text-align: center;
+    font-weight: bolder;
+    margin-top: 2%;
+    margin-bottom: 4%;
+    padding: 2% 0;
+
+}
+
+
+/* DOWNLOAD BUTTON --------------------------------------------------------------------------------------------------- */
+@keyframes downloadhover {
+    from { color: white; }
+    to { color:yellow; }
+}
+
+.downloadbutton {
+    color: var(--primary);
+    font-size: 130%;
+    margin: auto;
+    width: 200px;
+    height: 75px;
+    padding: 3px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bolder;
+    text-decoration: none;
+    background-color: white;
+    box-shadow: 0 3px 3px #222;
+    outline: none;
+    border: none;
+    transition: background-color 0.25s, color 0.25s;
+}
+
+.downloadbutton:hover{
+    color: white;
+    background-color: grey;
+    transition: background-color 0.25s, color 0.25s;
+}
+
+.downloadbutton:active{
+    transform: scale(0.98);
+    transition: transform 0.1s;
+}
+
+
+/* RATING BOARD ----------------------------------------------------------------------------------------------------------------------- */
+.ratingcontainer{
+    width: 30%;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 20px;
+    height: fit-content;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.ratingtitle{
+    text-align: center;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+
+.description {
+    display: inline-block;
+    margin-top:0;
+}
+
+.loadercontainer{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    width: fit-content;
+}
+
+
+.ratingtable{
+    display: none;
+    width: 70%; 
+    margin: auto;
+    height:fit-content;
+    font-size: 130%;
+}
+
+.ratingtable_row{
+    border: medium;
+    border-color: blue;
+    width: 100%;
+    height: fit-content;
+}
+
+.ratingtable_id{
+    text-align: center;
+    font-weight: lighter;
+    font-size: 60%;
+    height: 100%;
+    width: 15%;
+    color: var(--secondary);
+}
+
+.ratingtable_name{
+    text-align: left;
+    height: 100%;
+    width: 30%;
+}
+
+.ratingtable_rating{
+    text-align: right;
+    font-weight: bold;
+    width: 10%;
+    height: 100%;
+}
+
+
+.ratingtable_header{
+    color: var(--secondary);
+    font-weight: lighter;
+    font-size: 80%;
+    height: 60px;
+}
+
+.rating_error{
+    display: none;
+    text-align: center;
+    font-size: 120%;
+}
+
+
+
+
+/* Loading spinner (source: https://loading.io/css/) */
+.lds-ripple {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+.lds-ripple div {
+position: absolute;
+border: 4px solid var(--primary);
+opacity: 1;
+border-radius: 50%;
+animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+}
+100% {
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+}
+  }
