@@ -1,8 +1,5 @@
 package logic;
 
-import kong.unirest.HttpResponse;
-import kong.unirest.Unirest;
-import kong.unirest.json.JSONObject;
 import model.User;
 import model.GameState;
 import utility.DebugPrinter;
@@ -17,7 +14,7 @@ import java.util.List;
 @WebService(endpointInterface = "logic.HangmanLogic")
 public class HangmanLogicServer implements HangmanLogic, Runnable {
 
-    private static final long TIMEOUT = 120;
+    private static final long TIMEOUT = 1800; // 30 minutes
     private static final long TIMEOUT_CHECK_FREQ = 10; // Seconds
 
     private Endpoint endpoint;
@@ -93,14 +90,15 @@ public class HangmanLogicServer implements HangmanLogic, Runnable {
      * @param username The DTU Username (i.e. s185139)
      * @param password The 62597 course password
      */
-    public void logout(String username, String password){
+    public boolean logout(String username, String password){
         if( !DatabaseConnector.authenticateUser(username, password)){
             DebugPrinter.printf("Logout Failed: couldn't authenticate user (%s, %s)", username, password);
-            return;
+            return false;
         }
 
         removeClient(username);
         DebugPrinter.print(String.format("Logout (%s, %s): success", username, password));
+        return true;
     }
 
 

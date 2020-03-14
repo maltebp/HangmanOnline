@@ -39,7 +39,7 @@ public interface HangmanLogic {
      * @param password The 62597 course password
      */
     @WebMethod
-    void logout(String username, String password);
+    boolean logout(String username, String password);
 
 
     /**

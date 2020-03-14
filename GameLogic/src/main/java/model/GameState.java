@@ -21,6 +21,16 @@ public class GameState {
     public int remainingAttempts;
     public int ratingChange = 0;
 
+
+    /*  Guess Results
+            0: No guess made
+            1: Correct
+            2: Wrong
+            3: Wrong input (no within dictionairy)
+            4: Already guessed
+     */
+    public int guessResult = 0;
+
     @Override
     public String toString(){
         return String.format("GameState( word=%s, finished=%s, won=%s, attempts=%d)", word, gameFinished, gameWon, remainingAttempts );

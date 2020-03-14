@@ -30,12 +30,15 @@ class GameController {
      */
     static void guessLetter(GameState gameState, char guessedLetter) {
         // Check if letter can be guessed
-        if( DICTIONAIRY.indexOf(guessedLetter) == -1 )
+        if (DICTIONAIRY.indexOf(guessedLetter) == -1){
             // Letter not allowed
+            gameState.guessResult = 3;
             return;
+        }
 
         if( gameState.wrongLetters.contains(guessedLetter) || gameState.correctLetters.contains(guessedLetter) ){
             // Already guessed that letter
+            gameState.guessResult = 4;
             return;
         }
 
@@ -43,9 +46,11 @@ class GameController {
             // Wrong letter
             gameState.wrongLetters.add(guessedLetter);
             gameState.remainingAttempts--;
+            gameState.guessResult = 2;
         }else {
             // Correct letter
             gameState.correctLetters.add(guessedLetter);
+            gameState.guessResult = 1;
 
             // Adjust guessed word
             String currentWord = "";
