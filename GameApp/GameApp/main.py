@@ -17,6 +17,7 @@ username, password = sys.argv[1], sys.argv[2]
 
 COLOUR_BACKGROUND = (221, 110, 56)
 COLOUR_FOREGROUND = (221, 192, 56)
+font_gameover = pygame.font.Font('freesansbold.ttf', 64)
 font_word = pygame.font.Font('freesansbold.ttf', 32)
 font_guess = pygame.font.Font('freesansbold.ttf', 16)
 
@@ -74,6 +75,14 @@ while carryOn:
                 gamestate = gameServer.service.guessLetter(username, ord(key[0]))
                 print(gamestate)
                 key = ''
+
+#                if gamestate.gameFinished:
+#                    if gamestate.gameWon:
+#                        text = font_gameover.render("You Won!", True, (200, 0, 0))
+#                    else:
+#                        text = font_gameover.render("You lost!", True, (200, 0, 0))
+#                    screen.blit(text, (screen.get_rect().center[0] - 100, screen.get_rect().center[1]))
+
             else:
                 print("A key was pressed: ", event.unicode)
                 key = event.unicode
