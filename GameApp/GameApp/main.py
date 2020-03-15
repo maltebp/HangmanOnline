@@ -61,6 +61,7 @@ print(gamestate)
 
 
 key = ''
+gameover_text = font_gameover.render("", True, (200, 0, 0))
 
 while carryOn:
     # --- Main event loop
@@ -76,12 +77,12 @@ while carryOn:
                 print(gamestate)
                 key = ''
 
-#                if gamestate.gameFinished:
-#                    if gamestate.gameWon:
-#                        text = font_gameover.render("You Won!", True, (200, 0, 0))
-#                    else:
-#                        text = font_gameover.render("You lost!", True, (200, 0, 0))
-#                    screen.blit(text, (screen.get_rect().center[0] - 100, screen.get_rect().center[1]))
+                if gamestate.gameFinished:
+                    if gamestate.gameWon:
+                        gameover_text = font_gameover.render("You Won!", True, (200, 0, 0))
+                    else:
+                        gameover_text = font_gameover.render("You lost!", True, (200, 0, 0))
+
 
             else:
                 print("A key was pressed: ", event.unicode)
@@ -109,6 +110,7 @@ while carryOn:
     # Add text
     screen.blit(word, (screen.get_rect().center[0] - 100, screen.get_rect().center[1]))  # write text
     screen.blit(guess, (screen.get_rect().center[0] - 150, screen.get_rect().center[1] + 50))  # write text
+    screen.blit(gameover_text, screen.get_rect().center)
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
 
